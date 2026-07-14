@@ -1,0 +1,17 @@
+# build artifacts
+/leasepin
+/dist/
+
+# runtime state (never commit live leases)
+*.state.json
+
+# test and coverage output
+*.test
+*.out
+coverage.*
+
+# editor noise
+.idea/
+.vscode/
+*.swp
+.DS_Store

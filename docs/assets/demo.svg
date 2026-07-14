@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" font-family="Menlo, Consolas, monospace" font-size="14" xml:space="preserve">
+  <rect width="760" height="420" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="380" y="27" fill="#8b949e" text-anchor="middle" font-size="12">leasepin — leases and fencing tokens over HTTP, withlock for any command</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="62"><tspan fill="#7ee787">$</tspan> leasepin acquire --name nightly-backup --holder cron-web01 --ttl 30s</text>
+    <text x="24" y="86">acquired nightly-backup: <tspan fill="#79c0ff">token 1</tspan>, holder cron-web01, expires in 30s</text>
+    <text x="24" y="124"><tspan fill="#7ee787">$</tspan> leasepin acquire --name nightly-backup --holder cron-web02 --ttl 30s</text>
+    <text x="24" y="148"><tspan fill="#f85149">lock "nightly-backup" is held by "cron-web01"</tspan> until 2026-07-13T05:57:26Z</text>
+    <text x="24" y="170" fill="#8b949e"># exit code 10 — the duplicate cron run simply skips this cycle</text>
+    <text x="24" y="208"><tspan fill="#7ee787">$</tspan> leasepin withlock --name deploy --ttl 30s -- ./deploy.sh</text>
+    <text x="24" y="232">deploying with fencing token <tspan fill="#79c0ff">7</tspan></text>
+    <text x="24" y="254" fill="#8b949e"># lease renewed every ttl/3; if it is ever lost, the command is stopped (exit 11)</text>
+    <text x="24" y="292"><tspan fill="#7ee787">$</tspan> leasepin list</text>
+    <text x="24" y="316" fill="#d2a8ff">NAME                     TOKEN    HOLDER                           EXPIRES</text>
+    <text x="24" y="338">deploy                   <tspan fill="#79c0ff">7</tspan>        web01-4242-9f3c61aa              28s</text>
+    <text x="24" y="376" fill="#8b949e"># tokens only ever go up — across releases, expiries, and server restarts.</text>
+    <text x="24" y="398" fill="#8b949e"># downstream stores reject any write with a lower token than they last saw.</text>
+  </g>
+</svg>
